@@ -1,0 +1,8 @@
+targets:
+    # //YOUR_TARGETS/...
+
+bazel_binary: /home/user/PyPrestoProcessor/tools/bazel
+
+build_manual_targets: false
+
+derive_targets_from_directories: false

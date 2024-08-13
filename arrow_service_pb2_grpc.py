@@ -3,7 +3,7 @@
 import grpc
 import warnings
 
-import presto_pb2 as presto__pb2
+import arrow_service_pb2 as arrow__service__pb2
 
 GRPC_GENERATED_VERSION = '1.65.4'
 GRPC_VERSION = grpc.__version__
@@ -20,7 +20,7 @@ except ImportError:
 if _version_not_supported:
     warnings.warn(
         f'The grpc package installed is at version {GRPC_VERSION},'
-        + f' but the generated code in presto_pb2_grpc.py depends on'
+        + f' but the generated code in arrow_service_pb2_grpc.py depends on'
         + f' grpcio>={GRPC_GENERATED_VERSION}.'
         + f' Please upgrade your grpc module to grpcio>={GRPC_GENERATED_VERSION}'
         + f' or downgrade your generated code using grpcio-tools<={GRPC_VERSION}.'
@@ -30,7 +30,7 @@ if _version_not_supported:
     )
 
 
-class PrestoServiceStub(object):
+class ArrowServiceStub(object):
     """Missing associated documentation comment in .proto file."""
 
     def __init__(self, channel):
@@ -39,43 +39,43 @@ class PrestoServiceStub(object):
         Args:
             channel: A grpc.Channel.
         """
-        self.ProcessPage = channel.unary_unary(
-                '/presto.PrestoService/ProcessPage',
-                request_serializer=presto__pb2.GrpcSerializedPage.SerializeToString,
-                response_deserializer=presto__pb2.GrpcSerializedPage.FromString,
+        self.SendArrowArray = channel.unary_unary(
+                '/arrowservice.ArrowService/SendArrowArray',
+                request_serializer=arrow__service__pb2.ArrowArrayRequest.SerializeToString,
+                response_deserializer=arrow__service__pb2.ArrowArrayResponse.FromString,
                 _registered_method=True)
 
 
-class PrestoServiceServicer(object):
+class ArrowServiceServicer(object):
     """Missing associated documentation comment in .proto file."""
 
-    def ProcessPage(self, request, context):
+    def SendArrowArray(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
 
-def add_PrestoServiceServicer_to_server(servicer, server):
+def add_ArrowServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
-            'ProcessPage': grpc.unary_unary_rpc_method_handler(
-                    servicer.ProcessPage,
-                    request_deserializer=presto__pb2.GrpcSerializedPage.FromString,
-                    response_serializer=presto__pb2.GrpcSerializedPage.SerializeToString,
+            'SendArrowArray': grpc.unary_unary_rpc_method_handler(
+                    servicer.SendArrowArray,
+                    request_deserializer=arrow__service__pb2.ArrowArrayRequest.FromString,
+                    response_serializer=arrow__service__pb2.ArrowArrayResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
-            'presto.PrestoService', rpc_method_handlers)
+            'arrowservice.ArrowService', rpc_method_handlers)
     server.add_generic_rpc_handlers((generic_handler,))
-    server.add_registered_method_handlers('presto.PrestoService', rpc_method_handlers)
+    server.add_registered_method_handlers('arrowservice.ArrowService', rpc_method_handlers)
 
 
  # This class is part of an EXPERIMENTAL API.
-class PrestoService(object):
+class ArrowService(object):
     """Missing associated documentation comment in .proto file."""
 
     @staticmethod
-    def ProcessPage(request,
+    def SendArrowArray(request,
             target,
             options=(),
             channel_credentials=None,
@@ -88,9 +88,9 @@ class PrestoService(object):
         return grpc.experimental.unary_unary(
             request,
             target,
-            '/presto.PrestoService/ProcessPage',
-            presto__pb2.GrpcSerializedPage.SerializeToString,
-            presto__pb2.GrpcSerializedPage.FromString,
+            '/arrowservice.ArrowService/SendArrowArray',
+            arrow__service__pb2.ArrowArrayRequest.SerializeToString,
+            arrow__service__pb2.ArrowArrayResponse.FromString,
             options,
             channel_credentials,
             insecure,

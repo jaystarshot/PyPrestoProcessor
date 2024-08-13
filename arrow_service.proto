@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package arrowservice;
+
+service ArrowService {
+  rpc SendArrowArray (ArrowArrayRequest) returns (ArrowArrayResponse);
+}
+
+message ArrowArrayRequest {
+  bytes data = 1;
+}
+
+message ArrowArrayResponse {
+  bytes data = 1;
+}
