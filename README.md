@@ -29,14 +29,3 @@ Goal is to process presto pages in a Python process and evaluate models.
     python server.py
     ```
 
-5. Run the REST API:
-
-    ```sh
-    uvicorn app:app --host 0.0.0.0 --port 8000
-    ```
-
-6. Send a sample page:
-
-    ```sh
-    curl -X POST http://localhost:8000/process -H "Content-Type: application/json" -d '{"sliceBytes": "aGVsbG8=", "positionCount": 1, "uncompressedSizeInBytes": 12345, "pageCodecMarkers": "d29ybGQ=", "checksum": 6789}'
-    ```
